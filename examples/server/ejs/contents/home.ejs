@@ -1,0 +1,33 @@
+<h2>Request parameters</h2>
+
+<table>
+    <tr>
+        <th>HTTP version</th>
+        <td><%= req.httpVersion %></td>
+    </tr>
+    <tr>
+        <th>Method</th>
+        <td><%= req.method %></td>
+    </tr>
+    <tr>
+        <th>URL</th>
+        <td><%= req.url %></td>
+    </tr>
+</table>
+
+<h2>Headers</h2>
+
+<table>
+<%
+Object.keys(req.headers).forEach(headerName => {
+    const headerValue = req.headers[headerName];
+
+    %>
+    <tr>
+        <th><%= headerName %></th>
+        <td><%= headerValue %></td>
+    </tr>
+    <%
+});
+%>
+</table>

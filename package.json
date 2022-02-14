@@ -1,0 +1,9 @@
+{
+  "name": "js-sblayout",
+  "version": "0.0.1",
+  "private": true,
+  "devDependencies": {
+    "ejs": "*",
+    "express": "*"
+  }
+}

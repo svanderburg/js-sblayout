@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>My page</title>
+        <script type="text/javascript" src="ejs.js"></script>
+        <script type="module">
+import { application } from "./appmodel.mjs";
+import { initRequestedPage, updateRequestedPage } from "../../../view/client/index.mjs";
+
+const templateHandlers = {
+  ejs: function(div, response) {
+      return ejs.render(response, {});
+  }
+}
+
+document.body.onload = function() {
+    initRequestedPage(application, templateHandlers);
+};
+
+document.body.onpopstate = function() {
+    updateRequestedPage(application, templateHandlers);
+};
+        </script>
+    </head>
+
+    <body>
+    </body>
+</html>

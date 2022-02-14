@@ -1,0 +1,44 @@
+<h2>Some parameters</h2>
+
+<table>
+    <tr>
+        <th>Location URL</th>
+        <td><%= window.location.href %></td>
+    </tr>
+    <tr>
+        <th>Browser languages</th>
+        <td>
+        <%
+        navigator.languages.forEach(language => {
+            %>
+            <%= language %><br>
+            <%
+        });
+        %>
+        </td>
+    </tr>
+    <tr>
+        <th>Browser code name</th>
+        <td><%= navigator.appCodeName %></td>
+    </tr>
+    <tr>
+        <th>Browser name</th>
+        <td><%= navigator.appName %></td>
+    </tr>
+    <tr>
+        <th>Browser version</th>
+        <td><%= navigator.appVersion %></td>
+    </tr>
+    <tr>
+        <th>Browser platform</th>
+        <td><%= navigator.platform %></td>
+    </tr>
+    <tr>
+        <th>Browser engine</th>
+        <td><%= navigator.product %></td>
+    </tr>
+    <tr>
+        <th>User agent string</th>
+        <td><%= navigator.userAgent %></td>
+    </tr>
+</table>
