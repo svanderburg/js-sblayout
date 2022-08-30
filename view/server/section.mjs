@@ -1,8 +1,10 @@
 import { StaticSection } from "../../model/section/StaticSection.mjs";
 import { MenuSection } from "../../model/section/MenuSection.mjs";
 import { ContentsSection } from "../../model/section/ContentsSection.mjs";
+import { CompoundSection } from "../../model/section/CompoundSection.mjs";
 
 import { displayMenuSection } from "./menusection.mjs";
+import { displaySections } from "./sections.mjs";
 import { includeSection } from "./util.mjs";
 
 /**
@@ -59,6 +61,8 @@ export async function displaySection(req, res, application, id, section, route, 
         await displayMenuSection(res, application, section, route, baseURL);
     } else if(section instanceof ContentsSection) {
         await displayContentsSection(req, res, id, currentPage, section, templateHandlers);
+    } else if(section instanceof CompoundSection) {
+        await displaySections(req, res, application, route, currentPage, baseURL, templateHandlers, section);
     }
 
     res.write("</div>\n");

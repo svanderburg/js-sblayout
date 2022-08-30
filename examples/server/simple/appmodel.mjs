@@ -3,6 +3,7 @@ import { Application } from "../../../model/Application.mjs";
 import { StaticSection } from "../../../model/section/StaticSection.mjs";
 import { MenuSection } from "../../../model/section/MenuSection.mjs";
 import { ContentsSection } from "../../../model/section/ContentsSection.mjs";
+import { CompoundSection } from "../../../model/section/CompoundSection.mjs";
 
 import { StaticContentPage } from "../../../model/page/StaticContentPage.mjs";
 import { HiddenStaticContentPage } from "../../../model/page/HiddenStaticContentPage.mjs";
@@ -29,8 +30,10 @@ export const application = new Application(
     {
         header: new StaticSection("header.html"),
         menu: new MenuSection(0),
-        submenu: new MenuSection(1),
-        contents: new ContentsSection(true)
+        container: new CompoundSection({
+            submenu: new MenuSection(1),
+            contents: new ContentsSection(true)
+        })
     },
 
     /* Pages */
@@ -42,7 +45,7 @@ export const application = new Application(
 
         aliaspage1: new PageAlias("Alias page 1", "page1"),
 
-        inaccessible: new InaccessibleContentPage("Inaccessible", new Contents("page1.php")),
+        inaccessible: new InaccessibleContentPage("Inaccessible", new Contents("page1.html")),
 
         page1: new StaticContentPage("Page 1", new Contents("page1.html"), {
             page11: new StaticContentPage("Subpage 1.1", new Contents("page1/subpage11.html")),

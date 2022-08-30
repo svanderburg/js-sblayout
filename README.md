@@ -296,6 +296,38 @@ following URL shows the red apple sub sub page:
 You can nest sub pages as deep as you want, but for the sake of usability this is
 not recommended in most cases.
 
+Creating compound sections
+--------------------------
+As explained in the first example, sections normally translate to `div`
+elements inside the `body` element. For the implementation of more advanced
+layouts, it may also be desired to nest `div`s.
+
+It is also possible to nest sections inside `CompoundSection` objects to
+generate nested `div`s:
+
+```php
+import { CompoundSection } from "js-sblayout/model/section/CompoundSection.mjs";
+
+/* Sections */
+{
+    header: new StaticSection("header.html"),
+    menu: new MenuSection(0),
+    container: new CompoundSection({
+        submenu: new MenuSection(1),
+        contents: new ContentsSection(true)
+    }),
+    footer: new StaticSection("footer.html")
+},
+```
+
+In the above example, we have added a compound section named: `container`.
+Inside the `container` we have embedded the `submenu` and `contents` sections.
+
+The above organization can be useful to, for example, vertically position the
+`header`, `menu`, `container` and `footer` sections and horizontally align the
+`submenu` and `contents` sections. The CSS properties of the `container` section
+can be used to change the positioning.
+
 Error pages
 -----------
 It may also happen that some error occurs while trying to display a page. For

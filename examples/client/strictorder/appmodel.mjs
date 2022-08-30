@@ -3,6 +3,7 @@ import { Application } from "../../../model/Application.mjs";
 import { StaticSection } from "../../../model/section/StaticSection.mjs";
 import { MenuSection } from "../../../model/section/MenuSection.mjs";
 import { ContentsSection } from "../../../model/section/ContentsSection.mjs";
+import { CompoundSection } from "../../../model/section/CompoundSection.mjs";
 
 import { StaticContentPage } from "../../../model/page/StaticContentPage.mjs";
 import { HiddenStaticContentPage } from "../../../model/page/HiddenStaticContentPage.mjs";
@@ -23,8 +24,10 @@ export const application = new Application(
     [
         [ "header", new StaticSection("header.html") ],
         [ "menu", new MenuSection(0) ],
-        [ "submenu", new MenuSection(1) ],
-        [ "contents", new ContentsSection(true) ]
+        [ "container", new CompoundSection([
+            [ "submenu", new MenuSection(1) ],
+            [ "contents", new ContentsSection(true) ]
+        ])]
     ],
 
     /* Pages */

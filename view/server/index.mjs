@@ -1,6 +1,6 @@
 import { determineRoute } from "./page.mjs";
 import { displayController } from "./controller.mjs";
-import { displaySection } from "./section.mjs";
+import { displaySections } from "./sections.mjs";
 import { generateScriptSection } from "./scripts.mjs";
 import { generateStyleSection } from "./styles.mjs";
 
@@ -96,11 +96,7 @@ export async function displayRequestedPage(req, res, application, path, template
     res.write("\t</head>\n");
 
     res.write("\t<body>\n");
-
-    for(const [id, section] of application.sections) {
-        await displaySection(extendedReq, res, application, id, section, route, currentPage, baseURL, templateHandlers);
-    }
-
+    await displaySections(extendedReq, res, application, route, currentPage, baseURL, templateHandlers);
     res.write("\t</body>\n");
     res.write("</html>\n");
 

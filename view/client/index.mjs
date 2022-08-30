@@ -1,8 +1,8 @@
-import { determineRoute } from "../../view/client/page.mjs";
-import { executeController } from "../../view/client/controller.mjs";
-import { generateStaticScriptSection, updateScriptSection } from "../../view/client/scripts.mjs";
-import { generateStaticStyleSection, updateStyleSection } from "../../view/client/styles.mjs";
-import { createSectionDiv, updateSection } from "../../view/client/section.mjs";
+import { determineRoute } from "./page.mjs";
+import { executeController } from "./controller.mjs";
+import { generateStaticScriptSection, updateScriptSection } from "./scripts.mjs";
+import { generateStaticStyleSection, updateStyleSection } from "./styles.mjs";
+import { generateSections, updateSections } from "./sections.mjs";
 
 function determinePath() {
     if(window.location.hash) {
@@ -42,11 +42,7 @@ function updateDynamicParts(application, route, currentPage, params, templateHan
     updateStyleSection(application, currentPage);
 
     /* Retrieve the contents for each section div */
-
-    for(const [id, section] of application.sections) {
-        const div = document.getElementById(id);
-        updateSection(div, application, section, id, route, currentPage, params, templateHandlers);
-    }
+    updateSections(application, route, currentPage, params, templateHandlers);
 }
 
 /**
@@ -79,10 +75,7 @@ export function initRequestedPage(application, templateHandlers = {}) {
     generateStaticStyleSection(application, currentPage);
 
     /* Add divs for each section */
-    for(const id of application.sections.keys()) {
-        const div = createSectionDiv(id);
-        document.body.appendChild(div);
-    }
+    generateSections(document.body, application);
 
     /* Update all dynamic parts */
     updateDynamicParts(application, route, currentPage, params, templateHandlers);

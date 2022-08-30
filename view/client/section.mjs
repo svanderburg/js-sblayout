@@ -1,8 +1,10 @@
 import { ContentsSection } from "../../model/section/ContentsSection.mjs";
 import { MenuSection } from "../../model/section/MenuSection.mjs";
 import { StaticSection } from "../../model/section/StaticSection.mjs";
-import { displayMenuSection } from "../../view/client/menusection.mjs";
+import { CompoundSection } from "../../model/section/CompoundSection.mjs";
+import { displayMenuSection } from "./menusection.mjs";
 import { includeSection } from "./util.mjs";
+import { updateSections } from "./sections.mjs";
 
 /**
  * Creates a HTML Div Element for a given section
@@ -52,5 +54,7 @@ export function updateSection(div, application, section, id, route, currentPage,
         displayMenuSection(div, application, section, route, params.baseURL);
     } else if(section instanceof ContentsSection) {
         loadContentsSectionIntoDiv(section, id, currentPage, div, params, templateHandlers);
+    } else if(section instanceof CompoundSection) {
+        updateSections(application, route, currentPage, params, templateHandlers, section);
     }
 }
