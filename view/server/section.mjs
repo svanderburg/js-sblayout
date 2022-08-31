@@ -53,7 +53,7 @@ async function displayContentsSection(req, res, id, currentPage, section, templa
  * @param {Object} templateHandlers An object mapping file extensions to functions that renders the file
  */
 export async function displaySection(req, res, application, id, section, route, currentPage, baseURL, templateHandlers) {
-    res.write('<div id="' + id + '">\n');
+    res.write('<div id="' + id + '">');
 
     if(section instanceof StaticSection) {
         await displayStaticSection(req, res, section, templateHandlers);
