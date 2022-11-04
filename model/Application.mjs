@@ -34,39 +34,27 @@ class Application {
     }
 
     /**
-     * Derives the route to the 403 error page.
-     *
-     * @param {Object} params An object containing additional parameters
-     * @return {Route} The 403 error page route
-     */
-    determine403Route(params) {
-        const route = new Route([ "403" ]);
-        this.entryPage.examineRoute(this, route, params);
-        return route;
-    }
-
-    /**
-     * Derives the route to the 404 error page.
-     *
-     * @param {Object} params An object containing additional parameters
-     * @return {Route} The 404 error page route
-     */
-    determine404Route(params) {
-        const route = new Route([ "404" ]);
-        this.entryPage.examineRoute(this, route, params);
-        return route;
-    }
-
-    /**
      * Examines a route derived from the path components of the requested URL and records all pages visited.
      *
      * @param {Route} route Route to investigate
      * @param {Object} params An object containing additional parameters
-     * @throws {PageNotFoundException} If the page cannot be found
-     * @throws {PageForbiddenException} If access to the page is restricted
+     * @throws {PageException} In case an error occured, such as the page cannot be found or access is restricted
      */
     examineRoute(route, params) {
         this.entryPage.examineRoute(this, route, params);
+    }
+
+    /**
+     * Derives the route to the error page.
+     *
+     * @param {PageException} cause The page exception that triggered the error page
+     * @param {Object} params An object containing additional parameters
+     * @return {Route} The error page route
+     */
+    determineErrorRoute(cause, params) {
+        const route = new Route([ cause.statusCode.toString() ]);
+        this.entryPage.examineRoute(this, route, params);
+        return route;
     }
 
     /**
@@ -75,8 +63,7 @@ class Application {
      * @param {String} path The URL to determine the route for
      * @param {Object} params An object containing additional parameters
      * @return {Route} A route that records all visited pages
-     * @throws {PageNotFoundException} If the page cannot be found
-     * @throws {PageForbiddenException} If access to the page is restricted
+     * @throws {PageException} In case an error occured, such as the page cannot be found or access is restricted
      */
     determineRoute(path, params) {
         let ids;

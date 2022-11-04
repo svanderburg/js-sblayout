@@ -1,5 +1,4 @@
-import { PageForbiddenException } from "../../model/PageForbiddenException.mjs";
-import { PageNotFoundException } from "../../model/PageNotFoundException.mjs";
+import { PageException } from "../../model/PageException.mjs";
 
 /**
  * Determines the route from the entry page to the requested page.
@@ -19,12 +18,8 @@ export function determineRoute(res, application, path, params) {
     try {
         route = application.determineRoute(appPath, params);
     } catch(ex) {
-        if(ex instanceof PageForbiddenException) {
-            status = 403;
-            route = application.determine403Route(params);
-        } else if(ex instanceof PageNotFoundException) {
-            status = 404;
-            route = application.determine404Route(params);
+        if(ex instanceof PageException) {
+            route = application.determineErrorRoute(ex, params);
         } else {
             status = 500;
             throw ex;
