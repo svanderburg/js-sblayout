@@ -18,20 +18,6 @@ class ContentPage extends Page {
     }
 
     /**
-     * @see Page#checkVisibility
-     */
-    checkVisibility() {
-        return true;
-    }
-
-    /**
-     * @see Page#checkAccessibility
-     */
-    checkAccessibility() {
-        return true;
-    }
-
-    /**
      * @see Page#examineRoute
      */
     examineRoute(application, route, params, index = 0) {

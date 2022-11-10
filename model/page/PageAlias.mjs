@@ -31,17 +31,11 @@ class PageAlias extends Page {
     }
 
     /**
-     * @see Page#checkVisibility
+     * @see Page#subPageIterable
      */
-    checkVisibility() {
-        return true;
-    }
-
-    /**
-     * @see Page#checkAccessibility
-     */
-    checkAccessibility() {
-        return true;
+    subPageIterable()
+    {
+        return this.subPages;
     }
 
     /**

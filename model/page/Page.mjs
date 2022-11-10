@@ -18,7 +18,7 @@ class Page {
      * @return {boolean} true if the page is visible, else false
      */
     checkVisibility() {
-        throw new Error("Page::checkVisibility is abstract");
+        return true;
     }
 
     /**
@@ -27,7 +27,7 @@ class Page {
      * @return {boolean} true if the user has access, else false
      */
     checkAccessibility() {
-        throw new Error("Page::checkAccessibility is abstract");
+        return true;
     }
 
     /**
@@ -37,6 +37,28 @@ class Page {
      */
     checkVisibleInMenu() {
         return this.checkVisibility() && this.checkAccessibility();
+    }
+
+    /**
+     * Creates an iterator that can be used to traverse over all sub pages.
+     *
+     * @return {Object} An iterable object
+     */
+    subPageIterable()
+    {
+        return []; // An empty array means there are no sub pages to iterate over
+    }
+
+    /**
+     * Decides how to compose a URL for the given page from its baseURL and the page identifier.
+     *
+     * @param {String} baseURL Base URL of the page
+     * @param {String} id Identifier of the page
+     * @return {String} The URL to this page
+     */
+    deriveURL(baseURL, id)
+    {
+        return baseURL + "/" + encodeURIComponent(id);
     }
 
     /**

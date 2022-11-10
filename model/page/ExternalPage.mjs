@@ -17,17 +17,11 @@ class ExternalPage extends Page {
     }
 
     /**
-     * @see Page#checkVisibility
+     * @see Page#deriveURL
      */
-    checkVisibility() {
-        return true;
-    }
-
-    /**
-     * @see Page#checkAccessibility
-     */
-    checkAccessibility() {
-        return true;
+    deriveURL(baseURL, id)
+    {
+        return this.url;
     }
 
     /**

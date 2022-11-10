@@ -73,14 +73,16 @@ class Route {
     /**
      * Composes a base URL for a menu section on a certain level.
      *
+     * @param {String} baseURL Base URL of the root page
      * @param {numeric} level Menu section level
      * @return {String} The base URL for all links in the menu section
      */
     composeBaseURL(baseURL, level) {
-        let basePath = baseURL + "/";
+        let basePath = baseURL;
 
         for(let i = 0; i < level; i++) {
-            basePath += this.ids[i] + "/";
+            const currentId = this.ids[i];
+            basePath += "/" + encodeURIComponent(currentId);
         }
 
         return basePath;

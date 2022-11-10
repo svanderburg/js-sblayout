@@ -25,6 +25,14 @@ class StaticContentPage extends ContentPage {
     }
 
     /**
+     * @see Page#subPageIterable
+     */
+    subPageIterable()
+    {
+        return this.subPages;
+    }
+
+    /**
      * @see Page#examineRoute
      */
     examineRoute(application, route, params, index = 0) {
