@@ -913,6 +913,9 @@ There are also facilities to include application wide and per-page stylesheets
 and script includes. We can also make pages invisible from menu sections by
 instantiating pages that are prefixed with `Hidden*`.
 
+It is also possible to automatically generate a site map (`displaySiteMap`) and
+bread crumbs for the currently visited page (`displayBreadcrumbs`).
+
 Consult the API documentation for more information.
 
 Examples
@@ -923,7 +926,7 @@ This package includes three example web applications that can be found in the
 * The `server/` folder contains example applications that render pages
   server-side.
 * The `client/` folder contains example applications that dynamically update
-  the DOM client side.
+  the DOM on the client side.
 
 Each folder contains the following example applications:
 * `simple/` demonstrates simple sub pages, inaccessible sub pages, dynamic sub

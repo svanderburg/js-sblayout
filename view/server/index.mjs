@@ -43,14 +43,16 @@ export function determineFavIconPath(baseURL, icon) {
  * Creates and extended req object with sbLayout properties
  *
  * @param {Object} req An object that contains the HTTP request parameters (provided by the http.Server or another framework built around it)
+ * @param {Application} application Encoding of the web application layout and pages
  * @param {String} baseURL Base URL of the web application
  * @return {Object} An extended request object with sbLayout properties
  */
-export function createExtendedRequestObject(req, baseURL) {
+export function createExtendedRequestObject(req, application, baseURL) {
     const extendedReq = Object.create(req);
     extendedReq.sbLayout = {
         query: {},
         "accept-language": req.headers["accept-language"],
+        application: application,
         baseURL: baseURL
     };
     return extendedReq;
@@ -69,11 +71,13 @@ export function createExtendedRequestObject(req, baseURL) {
  */
 export async function displayRequestedPage(req, res, application, path, templateHandlers = {}, baseURL = "", doctype = "html4") {
     /* Extend request parameters with sbLayout properties */
-    const extendedReq = createExtendedRequestObject(req, baseURL);
+    const extendedReq = createExtendedRequestObject(req, application, baseURL);
 
     /* Determine page route */
     const route = determineRoute(res, application, path, extendedReq.sbLayout);
     const currentPage = route.determineCurrentPage();
+    extendedReq.sbLayout.route = route;
+    extendedReq.sbLayout.currentPage = currentPage;
 
     /* Display the controller page */
     await displayController(extendedReq, res, currentPage, templateHandlers);

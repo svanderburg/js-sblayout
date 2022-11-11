@@ -12,8 +12,9 @@ function determinePath() {
     }
 }
 
-function createParams() {
+function createParams(application) {
     return {
+        application: application,
         baseURL: window.location.pathname,
         query: {},
         "accept-language": window.navigator.languages
@@ -52,12 +53,14 @@ function updateDynamicParts(application, route, currentPage, params, templateHan
  * @param {Object} templateHandlers An object mapping file extensions to functions that renders the file
  */
 export function initRequestedPage(application, templateHandlers = {}) {
-    const params = createParams();
+    const params = createParams(application);
     const path = determinePath();
 
     /* Determine page route */
     const route = determineRoute(application, path, params);
     const currentPage = route.determineCurrentPage();
+    params.route = route;
+    params.currentPage = currentPage;
 
     /* Execute the controller function, if provided */
     executeController(currentPage, params);
@@ -88,12 +91,14 @@ export function initRequestedPage(application, templateHandlers = {}) {
  * @param {Object} templateHandlers An object mapping file extensions to functions that renders the file
  */
 export function updateRequestedPage(application, templateHandlers = {}) {
-    const params = createParams();
+    const params = createParams(application);
     const path = determinePath();
 
     /* Determine page route */
     const route = determineRoute(application, path, params);
     const currentPage = route.determineCurrentPage();
+    params.route = route;
+    params.currentPage = currentPage;
 
     /* Execute the controller function, if provided */
     executeController(currentPage, params);

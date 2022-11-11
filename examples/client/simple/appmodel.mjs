@@ -14,8 +14,10 @@ import { InaccessibleContentPage } from "./includes/InaccessibleContentPage.mjs"
 
 import { Contents } from "../../../model/page/content/Contents.mjs";
 
-import { displayFormContents } from "./includes/contents/form.mjs";
 import { displayFirstName, displayLastNameSuggestion, displayFirstNameAndLastName } from "./includes/contents/names.mjs";
+import { displayFormContents } from "./includes/contents/tests/form.mjs";
+import { displayBreadcrumbsContents } from "./includes/contents/tests/breadcrumbs.mjs";
+import { displaySiteMapContents } from "./includes/contents/tests/sitemap.mjs";
 
 /* Create an application model */
 
@@ -59,13 +61,17 @@ export const application = new Application(
             page23: new StaticContentPage("Subpage 2.3", new Contents("page2/subpage23.html"))
         }),
 
-        form: new StaticContentPage("Form", new Contents(displayFormContents)),
-
         firstname: new DynamicContentPage("First name", "firstname", new Contents("firstname.html"), new StaticContentPage("First name", new Contents(displayFirstName), {
             lastname: new DynamicContentPage("Last name", "lastname", new Contents(displayLastNameSuggestion), new StaticContentPage("Last name", new Contents(displayFirstNameAndLastName)))
         })),
 
-        external: new ExternalPage("External", "http://www.google.com")
+        external: new ExternalPage("External", "http://www.google.com"),
+
+        tests: new StaticContentPage("Tests", new Contents("tests.html"), {
+            form: new StaticContentPage("Form", new Contents(displayFormContents)),
+            breadcrumbs: new StaticContentPage("Bread crumbs", new Contents(displayBreadcrumbsContents)),
+            sitemap: new StaticContentPage("Site map", new Contents(displaySiteMapContents))
+        })
     }),
 
     /* Favorite icon */
