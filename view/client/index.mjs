@@ -1,4 +1,4 @@
-import { determineRoute } from "./page.mjs";
+import { PageException } from "../../model/PageException.mjs";
 import { executeController } from "./controller.mjs";
 import { generateStaticScriptSection, updateScriptSection } from "./scripts.mjs";
 import { generateStaticStyleSection, updateStyleSection } from "./styles.mjs";
@@ -57,13 +57,26 @@ export function initRequestedPage(application, templateHandlers = {}) {
     const path = determinePath();
 
     /* Determine page route */
-    const route = determineRoute(application, path, params);
-    const currentPage = route.determineCurrentPage();
-    params.route = route;
-    params.currentPage = currentPage;
+    let route;
+    let currentPage;
 
-    /* Execute the controller function, if provided */
-    executeController(currentPage, params);
+    try {
+        route = application.determineRoute(path, params);
+        currentPage = route.determineCurrentPage();
+        params.route = route;
+        params.currentPage = currentPage;
+    } catch(ex) {
+        if(ex instanceof PageException) {
+            params.error = ex.displayMessage;
+        }
+        route = application.determineErrorRoute(ex, params);
+        currentPage = route.determineCurrentPage();
+        params.route = route;
+        params.currentPage = currentPage;
+
+        /* Execute the controller function, if provided */
+        executeController(currentPage, params);
+    }
 
     /* Generate favorite icon */
     const favIcon = createFavIcon(application.icon);
@@ -95,13 +108,26 @@ export function updateRequestedPage(application, templateHandlers = {}) {
     const path = determinePath();
 
     /* Determine page route */
-    const route = determineRoute(application, path, params);
-    const currentPage = route.determineCurrentPage();
-    params.route = route;
-    params.currentPage = currentPage;
+    let route;
+    let currentPage;
 
-    /* Execute the controller function, if provided */
-    executeController(currentPage, params);
+    try {
+        route = application.determineRoute(path, params);
+        currentPage = route.determineCurrentPage();
+        params.route = route;
+        params.currentPage = currentPage;
+
+        /* Execute the controller function, if provided */
+        executeController(currentPage, params);
+    } catch(ex) {
+        if(ex instanceof PageException) {
+            params.error = ex.displayMessage;
+        }
+        route = application.determineErrorRoute(ex, params);
+        currentPage = route.determineCurrentPage();
+        params.route = route;
+        params.currentPage = currentPage;
+    }
 
     /* Update all dynamic parts */
     updateDynamicParts(application, route, currentPage, params, templateHandlers);

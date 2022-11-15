@@ -6,9 +6,11 @@ import { PageException } from "./PageException.mjs";
 class PageNotFoundException extends PageException {
     /**
      * Creates a new PageNotFoundException instance
+     *
+     * @param {String} displayMessage Error message to be displayed (optional)
      */
-    constructor() {
-        super(404, "Not Found");
+    constructor(displayMessage = null) {
+        super(404, "Not Found", displayMessage);
     }
 }
 

@@ -6,9 +6,11 @@ import { PageException } from "./PageException.mjs";
 class PageForbiddenException extends PageException {
     /**
      * Creates a new PageForbiddenException instance
+     *
+     * @param {String} displayMessage Error message to be displayed (optional)
      */
-    constructor() {
-        super(403, "Forbidden");
+    constructor(displayMessage = null) {
+        super(403, "Forbidden", displayMessage);
     }
 }
 

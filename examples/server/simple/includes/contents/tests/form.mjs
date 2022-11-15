@@ -1,6 +1,12 @@
+import { BadRequestException } from "../../../../../../model/BadRequestException.mjs";
+
 export function displayFormController(req, res) {
     if(req.method == "POST") {
-        res.fullname = req.body.firstname + " " + req.body.lastname;
+        if(req.body.firstname == "" || req.body.lastname == "") {
+            throw new BadRequestException("This page requires a firstname and lastname parameter!");
+        } else {
+            res.fullname = req.body.firstname + " " + req.body.lastname;
+        }
     }
 }
 

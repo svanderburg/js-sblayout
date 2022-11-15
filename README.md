@@ -333,14 +333,16 @@ Error pages
 It may also happen that some error occurs while trying to display a page. For
 example, trying to access a sub page that does not exists (e.g.
 `http://localhost/oranges/purple`) should display a 404 error page.
-Moreover, pages that are inaccessible should display a 403 error page.
+Moreover, pages that are inaccessible should display a 403 error page and pages
+that fail to process input parameters should return a 400 error page.
 
 These error pages can be defined by adding them as a sub page to the entry page
-with keys `403` and `404`:
+with keys `400`, `403` and `404`:
 
 ```javascript
 /* Pages */
 new StaticContentPage("Fruit", new Contents("fruit.html"), {
+    400: new HiddenStaticContentPage("Bad request", new Contents("error/400.html")),
     403: new HiddenStaticContentPage("Forbidden", new Contents("error/403.html")),
     404: new HiddenStaticContentPage("Page not found", new Contents("error/404.html"))
     ...
@@ -501,6 +503,11 @@ The framework propagates the following parameters (through `req.sbLayout` or
 * `query` contains all dynamic parameters
 * `accept-language` contains the localization settings
 * `baseURL` refers to the base URL of the web application
+* `application` refers to the application model
+* `route` refers to the route to the currently opened page
+* `currentPage` refers to the currently opened page
+* `error` refers to an error message in case something went wrong
+  (e.g. a `BadRequestException`)
 
 Handling GET or POST parameters
 -------------------------------
@@ -529,6 +536,12 @@ To process the answer, we need to implement a function: `analyzeAnswer` that
 can take the provided answer from the `req.body` parameter. The function
 signature of the controller is identical to a function that generates a dynamic
 page.
+
+In addition to processing the input parameters, controllers can also throw
+exceptions that are instances of the `PageException` class. For example, you
+may want to check the provided user input for the presence of an answer.
+If none was provided, you may want to throw a `BadRequestException` with a
+message that explains to the user that a mandatory input parameter is missing.
 
 Using path components as parameters
 -----------------------------------

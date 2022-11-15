@@ -9,5 +9,5 @@ import { includeSection } from "./util.mjs";
  * @param {Object} templateHandlers An object mapping file extensions to functions that renders the file
  */
 export async function displayController(req, res, currentPage, templateHandlers) {
-    includeSection(req, res, currentPage.contents.controller, "controller", templateHandlers);
+    return includeSection(req, res, currentPage.contents.controller, "controller", templateHandlers);
 }

@@ -3,11 +3,16 @@
  */
 class PageException extends Error {
     /**
-     * Creates a new PageForbiddenException instance
+     * Creates a new PageException instance
+     *
+     * @param {numeric} statusCode HTTP status code
+     * @param {String} message Exception error message
+     * @param {String} displayMessage Error message to be displayed (optional)
      */
-    constructor(statusCode, message) {
+    constructor(statusCode, message, displayMessage = null) {
         super(message);
         this.statusCode = statusCode;
+        this.displayMessage = displayMessage;
     }
 }
 

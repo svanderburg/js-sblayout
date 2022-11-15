@@ -1,7 +1,3 @@
-import { ExternalPage } from "../../model/page/ExternalPage.mjs";
-import { PageAlias } from "../../model/page/PageAlias.mjs";
-import { StaticContentPage } from "../../model/page/StaticContentPage.mjs";
-
 /**
  * Displays a menu section containing links to sub pages.
  *

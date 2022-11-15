@@ -1,4 +1,4 @@
-import { determineRoute } from "./page.mjs";
+import { determineRoute, redirectToErrorPage } from "./page.mjs";
 import { displayController } from "./controller.mjs";
 import { displaySections } from "./sections.mjs";
 import { generateScriptSection } from "./scripts.mjs";
@@ -74,13 +74,25 @@ export async function displayRequestedPage(req, res, application, path, template
     const extendedReq = createExtendedRequestObject(req, application, baseURL);
 
     /* Determine page route */
-    const route = determineRoute(res, application, path, extendedReq.sbLayout);
-    const currentPage = route.determineCurrentPage();
-    extendedReq.sbLayout.route = route;
-    extendedReq.sbLayout.currentPage = currentPage;
+    let route;
+    let currentPage;
 
-    /* Display the controller page */
-    await displayController(extendedReq, res, currentPage, templateHandlers);
+    try {
+        route = determineRoute(res, application, path, extendedReq.sbLayout);
+        currentPage = route.determineCurrentPage();
+
+        extendedReq.sbLayout.route = route;
+        extendedReq.sbLayout.currentPage = currentPage;
+
+        /* Display the controller page */
+        await displayController(extendedReq, res, currentPage, templateHandlers);
+    } catch(ex) {
+        route = redirectToErrorPage(extendedReq, res, application, ex, extendedReq.sbLayout)
+        currentPage = route.determineCurrentPage();
+
+        extendedReq.sbLayout.route = route;
+        extendedReq.sbLayout.currentPage = currentPage;
+    }
 
     /* Display the doctype */
     displayDoctype(res, doctype);

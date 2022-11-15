@@ -1,7 +1,3 @@
-import { StaticContentPage } from "../../model/page/StaticContentPage.mjs";
-import { PageAlias } from "../../model/page/PageAlias.mjs";
-import { ExternalPage } from "../../model/page/ExternalPage.mjs";
-
 function createPageLink(id, page, route, section, basePath) {
     const link = document.createElement("a");
     link.href = page.deriveURL(basePath, id);

@@ -1,9 +1,14 @@
 function displayFullName(div, form) {
     const firstname = form.elements.namedItem("firstname").value;
     const lastname = form.elements.namedItem("lastname").value;
-    const fullname = firstname + " " + lastname;
 
-    div.innerHTML = "<p>Hi, I believe your full name is: " + fullname + "</p>\n";
+    if(firstname == "" || lastname == "") {
+        div.innerHTML = "<p>This page requires a firstname and lastname parameter!</p>\n";
+    } else {
+        const fullname = firstname + " " + lastname;
+
+        div.innerHTML = "<p>Hi, I believe your full name is: " + fullname + "</p>\n";
+    }
 }
 
 function createRowParagraph(text, name) {

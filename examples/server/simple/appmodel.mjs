@@ -14,6 +14,7 @@ import { InaccessibleContentPage } from "./includes/InaccessibleContentPage.mjs"
 
 import { Contents } from "../../../model/page/content/Contents.mjs";
 
+import { displayBadRequest } from "./includes/contents/badrequest.mjs";
 import { displayFirstName, displayLastNameSuggestion, displayFirstNameAndLastName } from "./includes/contents/names.mjs";
 import { displayFormController, displayFormContents } from "./includes/contents/tests/form.mjs";
 import { displayBreadcrumbsContents } from "./includes/contents/tests/breadcrumbs.mjs";
@@ -40,6 +41,7 @@ export const application = new Application(
 
     /* Pages */
     new StaticContentPage("Home", new Contents("home.html"), {
+        "400": new HiddenStaticContentPage("Bad request", new Contents(displayBadRequest)),
         "403": new HiddenStaticContentPage("Forbidden", new Contents("error/403.html")),
         "404": new HiddenStaticContentPage("Page not found", new Contents("error/404.html")),
 
