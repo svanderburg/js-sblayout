@@ -43,8 +43,6 @@ function createButtonParagraph(div) {
 }
 
 export function displayFormContents(div, params) {
-    div.innerHTML = "";
-
     const paragraph = document.createElement("p");
     paragraph.innerText = "Please enter your name:";
     div.appendChild(paragraph);

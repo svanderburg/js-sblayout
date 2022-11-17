@@ -10,5 +10,5 @@ export function displayBreadcrumbsContents(div, params) {
     innerHTML += "<p>From level 1:</p>\n";
     innerHTML += displayBreadcrumbs(params.baseURL, params.route, 1);
 
-    div.innerHTML = innerHTML;
+    div.innerHTML += innerHTML;
 }

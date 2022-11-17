@@ -28,7 +28,8 @@ function processTemplate(element, section, response, templateHandlers) {
  */
 export function includeSection(section, basePath, element, params, initialContents = "", templateHandlers = {}) {
     if(typeof section == "function") {
-        return section(element, params);
+        element.innerHTML = initialContents;
+        section(element, params);
     } else {
         const url = basePath + "/" + section;
 
