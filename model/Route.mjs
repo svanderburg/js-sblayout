@@ -71,21 +71,33 @@ class Route {
     }
 
     /**
-     * Composes a base URL for a menu section on a certain level.
+     * Composes the URL for the current page or any of its parent pages at a certain level.
      *
-     * @param {String} baseURL Base URL of the root page
-     * @param {numeric} level Menu section level
-     * @return {String} The base URL for all links in the menu section
+     * @param {String} baseURL Base URL to prepend to the resulting URL
+     * @param {numeric} level Page level
+     * @return {String} The URL of the current page or any of its parent pages
      */
-    composeBaseURL(baseURL, level) {
-        let basePath = baseURL;
+    composeURLAtLevel(baseURL, level) {
+        let url = baseURL;
 
         for(let i = 0; i < level; i++) {
             const currentId = this.ids[i];
-            basePath += "/" + encodeURIComponent(currentId);
+            const currentPage = this.pages[i + 1];
+
+            url = currentPage.deriveURL(url, currentId);
         }
 
-        return basePath;
+        return url;
+    }
+
+    /**
+     * Composes the URL to the parent page of the currently opened URL.
+     *
+     * @param {String} baseURL Base URL to prepend to the resulting URL
+     * @return {String} The URL to the parent page
+     */
+    composeParentPageURL(baseURL) {
+        return this.composeURLAtLevel(baseURL, this.ids.length - 1);
     }
 }
 

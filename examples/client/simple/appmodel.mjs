@@ -18,6 +18,7 @@ import { displayFirstName, displayLastNameSuggestion, displayFirstNameAndLastNam
 import { displayFormContents } from "./includes/contents/tests/form.mjs";
 import { displayBreadcrumbsContents } from "./includes/contents/tests/breadcrumbs.mjs";
 import { displaySiteMapContents } from "./includes/contents/tests/sitemap.mjs";
+import { displayParentContents } from "./includes/contents/tests/parent.mjs";
 
 /* Create an application model */
 
@@ -70,7 +71,8 @@ export const application = new Application(
         tests: new StaticContentPage("Tests", new Contents("tests.html"), {
             form: new StaticContentPage("Form", new Contents(displayFormContents)),
             breadcrumbs: new StaticContentPage("Bread crumbs", new Contents(displayBreadcrumbsContents)),
-            sitemap: new StaticContentPage("Site map", new Contents(displaySiteMapContents))
+            sitemap: new StaticContentPage("Site map", new Contents(displaySiteMapContents)),
+            parent: new StaticContentPage("Parent", new Contents(displayParentContents))
         })
     }),
 

@@ -23,7 +23,7 @@ export function displayMenuSection(div, application, section, route, baseURL) {
     div.innerHTML = "";
 
     if(section.level <= route.ids.length) {
-        const basePath = route.composeBaseURL(baseURL + "#", section.level);
+        const basePath = route.composeURLAtLevel(baseURL + "#", section.level);
         const rootPage = route.pages[section.level];
 
         // Display links to the sub pages

@@ -10,7 +10,7 @@
 export async function displayMenuSection(res, application, section, route, baseURL) {
     if(section.level <= route.ids.length) {
 
-        const basePath = route.composeBaseURL(baseURL, section.level);
+        const basePath = route.composeURLAtLevel(baseURL, section.level);
         const rootPage = route.pages[section.level];
 
         // Display links to the sub pages
