@@ -1,14 +1,4 @@
-function createPageLink(id, page, route, section, basePath) {
-    const link = document.createElement("a");
-    link.href = page.deriveURL(basePath, id);
-    link.text = page.title;
-
-    if(route.hasVisitedPageOnLevel(id, section.level)) {
-        link.className = "active";
-    }
-
-    return link;
-}
+import { displayInlineMenuSection } from "./inlinemenusection.mjs";
 
 /**
  * Displays a menu section containing links to sub pages.
@@ -23,18 +13,6 @@ export function displayMenuSection(div, application, section, route, baseURL) {
     div.innerHTML = "";
 
     if(section.level <= route.ids.length) {
-        const basePath = route.composeURLAtLevel(baseURL + "#", section.level);
-        const rootPage = route.pages[section.level];
-
-        // Display links to the sub pages
-        for(const [id, subPage] of rootPage.subPageIterable()) {
-            if(subPage.checkVisibleInMenu()) {
-                const link = createPageLink(id, subPage, route, section, basePath);
-                div.appendChild(link);
-
-                const textNode = document.createTextNode(" ");
-                div.appendChild(textNode);
-            }
-        }
+        displayInlineMenuSection(div, route, section.level, baseURL);
     }
 }

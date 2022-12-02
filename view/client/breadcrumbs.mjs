@@ -8,19 +8,21 @@
  * @return {String} HTML representation of the bread crumbs
  */
 export function displayBreadcrumbs(baseURL, route, startIndex = 0, displayRoot = false) {
-    let innerHTML = "<p>\n";
+    let innerHTML = '<p class="breadcrumbs">\n';
     let first = true;
     let url = baseURL;
 
+    const numOfIds = route.ids.length;
+
     if(displayRoot) {
         const currentPage = route.pages[0];
-        innerHTML += '<a href="' + (url == "" ? "/" : url) + '">' + currentPage.title + '</a>\n';
+        innerHTML += '<a href="' + (url == "" ? "/" : url) + '"' + ((numOfIds == 0 ? ' class="active"' : "")) + '>' + currentPage.title + '</a>\n';
         first = false;
     }
 
     url += "#";
 
-    for(let i = 0; i < route.ids.length; i++) {
+    for(let i = 0; i < numOfIds; i++) {
         const currentId = route.ids[i];
         const currentPage = route.pages[i + 1];
 
@@ -32,7 +34,7 @@ export function displayBreadcrumbs(baseURL, route, startIndex = 0, displayRoot =
             else
                 innerHTML += " &raquo; ";
 
-            innerHTML += '<a href="' + url + '">' + currentPage.title + '</a>\n';
+            innerHTML += '<a href="' + url + '"' + ((i == numOfIds - 1) ? ' class="active"' : "") + '>' + currentPage.title + '</a>\n';
         }
     }
 

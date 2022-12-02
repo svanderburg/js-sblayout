@@ -8,18 +8,20 @@
  * @param {boolean} displayRoot Indicates whether to include the root page
  */
 export function displayBreadcrumbs(req, res, route, startIndex = 0, displayRoot = false) {
-    res.write("<p>\n");
+    res.write('<p class="breadcrumbs">\n');
 
     let first = true;
     let url = req.sbLayout.baseURL;
 
+    const numOfIds = route.ids.length;
+
     if(displayRoot) {
         const currentPage = route.pages[0];
-        res.write('<a href="' + (url == "" ? "/" : url) + '">' + currentPage.title + '</a>\n');
+        res.write('<a href="' + (url == "" ? "/" : url) + '"' + ((numOfIds == 0 ? ' class="active"' : "")) + '>' + currentPage.title + '</a>\n');
         first = false;
     }
 
-    for(let i = 0; i < route.ids.length; i++) {
+    for(let i = 0; i < numOfIds; i++) {
         const currentId = route.ids[i];
         const currentPage = route.pages[i + 1];
 
@@ -31,7 +33,7 @@ export function displayBreadcrumbs(req, res, route, startIndex = 0, displayRoot 
             else
                 res.write(" &raquo; ");
 
-            res.write('<a href="' + url + '">' + currentPage.title + '</a>\n');
+            res.write('<a href="' + url + '"' + ((i == numOfIds - 1) ? ' class="active"' : "") + '>' + currentPage.title + '</a>\n');
         }
     }
 

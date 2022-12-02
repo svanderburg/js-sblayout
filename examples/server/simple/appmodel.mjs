@@ -20,6 +20,7 @@ import { displayFormController, displayFormContents } from "./includes/contents/
 import { displayBreadcrumbsContents } from "./includes/contents/tests/breadcrumbs.mjs";
 import { displaySiteMapContents } from "./includes/contents/tests/sitemap.mjs";
 import { displayParentContents } from "./includes/contents/tests/parent.mjs";
+import { displayMenuSectionContents, displayMenuSectionSubpage1, displayMenuSectionSubpage2, displayMenuSectionSubpage3 } from "./includes/contents/tests/menusection.mjs";
 
 /* Create an application model */
 
@@ -74,7 +75,12 @@ export const application = new Application(
             form: new StaticContentPage("Form", new Contents(displayFormContents, displayFormController)),
             breadcrumbs: new StaticContentPage("Bread crumbs", new Contents(displayBreadcrumbsContents)),
             sitemap: new StaticContentPage("Site map", new Contents(displaySiteMapContents)),
-            parent: new StaticContentPage("Parent", new Contents(displayParentContents))
+            parent: new StaticContentPage("Parent", new Contents(displayParentContents)),
+            menusection: new StaticContentPage("Menu section", new Contents(displayMenuSectionContents), {
+                subpage1: new StaticContentPage("Sub page 1", new Contents(displayMenuSectionSubpage1)),
+                subpage2: new StaticContentPage("Sub page 2", new Contents(displayMenuSectionSubpage2)),
+                subpage3: new StaticContentPage("Sub page 3", new Contents(displayMenuSectionSubpage3))
+            })
         })
     }),
 

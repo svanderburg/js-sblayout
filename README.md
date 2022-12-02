@@ -926,8 +926,12 @@ There are also facilities to include application wide and per-page stylesheets
 and script includes. We can also make pages invisible from menu sections by
 instantiating pages that are prefixed with `Hidden*`.
 
-It is also possible to automatically generate a site map (`displaySiteMap`) and
-bread crumbs for the currently visited page (`displayBreadcrumbs`).
+This framework also offers specialized features through the following functions:
+* A site map can be generated with: `displaySiteMap`
+* Bread crumbs, that show the path to the currently displayed page, can be
+  generated with: `displayBreadcrumbs`
+* It is also possible to embed a menu section in a content page (rather than
+  declaring a menu section) with: `displayEmbeddedMenuSection`
 
 Consult the API documentation for more information.
 
