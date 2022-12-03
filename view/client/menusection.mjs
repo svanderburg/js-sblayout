@@ -11,8 +11,5 @@ import { displayInlineMenuSection } from "./inlinemenusection.mjs";
  */
 export function displayMenuSection(div, application, section, route, baseURL) {
     div.innerHTML = "";
-
-    if(section.level <= route.ids.length) {
-        displayInlineMenuSection(div, route, section.level, baseURL);
-    }
+    displayInlineMenuSection(div, route, section.level, baseURL);
 }

@@ -10,7 +10,5 @@ import { displayInlineMenuSection } from "./inlinemenusection.mjs";
  * @param {String} baseURL Base URL of the web application
  */
 export async function displayMenuSection(res, application, section, route, baseURL) {
-    if(section.level <= route.ids.length) {
-        return displayInlineMenuSection(res, route, section.level, baseURL);
-    }
+    return displayInlineMenuSection(res, route, section.level, baseURL);
 }

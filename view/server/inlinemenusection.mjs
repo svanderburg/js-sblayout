@@ -7,20 +7,22 @@
  * @param {String} baseURL Base URL of the web application
  */
 export async function displayInlineMenuSection(res, route, level, baseURL) {
-    const basePath = route.composeURLAtLevel(baseURL, level);
-    const rootPage = route.pages[level];
+    if(level <= route.ids.length) {
+        const basePath = route.composeURLAtLevel(baseURL, level);
+        const rootPage = route.pages[level];
 
-    // Display links to the sub pages
-    for(const [id, subPage] of rootPage.subPageIterable()) {
-        if(subPage.checkVisibleInMenu()) {
-            const url = subPage.deriveURL(basePath, id);
+        // Display links to the sub pages
+        for(const [id, subPage] of rootPage.subPageIterable()) {
+            if(subPage.checkVisibleInMenu()) {
+                const url = subPage.deriveURL(basePath, id);
 
-            res.write("<a");
-                if(route.hasVisitedPageOnLevel(id, level)) {
-                res.write(' class="active"');
+                res.write("<a");
+                    if(route.hasVisitedPageOnLevel(id, level)) {
+                    res.write(' class="active"');
+                }
+
+                res.write(' href="' + url + '">' + subPage.title + '</a>\n');
             }
-
-            res.write(' href="' + url + '">' + subPage.title + '</a>\n');
         }
     }
 }

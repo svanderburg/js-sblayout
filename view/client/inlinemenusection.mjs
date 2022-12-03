@@ -19,17 +19,19 @@ function createPageLink(id, page, route, level, basePath) {
  * @param {String} baseURL Base URL of the web application
  */
 export function displayInlineMenuSection(div, route, level, baseURL) {
-    const basePath = route.composeURLAtLevel(baseURL + "#", level);
-    const rootPage = route.pages[level];
+    if(level <= route.ids.length) {
+        const basePath = route.composeURLAtLevel(baseURL + "#", level);
+        const rootPage = route.pages[level];
 
-    // Display links to the sub pages
-    for(const [id, subPage] of rootPage.subPageIterable()) {
-        if(subPage.checkVisibleInMenu()) {
-            const link = createPageLink(id, subPage, route, level, basePath);
-            div.appendChild(link);
+        // Display links to the sub pages
+        for(const [id, subPage] of rootPage.subPageIterable()) {
+            if(subPage.checkVisibleInMenu()) {
+                const link = createPageLink(id, subPage, route, level, basePath);
+                div.appendChild(link);
 
-            const textNode = document.createTextNode(" ");
-            div.appendChild(textNode);
+                const textNode = document.createTextNode(" ");
+                div.appendChild(textNode);
+            }
         }
     }
 }
