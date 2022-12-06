@@ -1,10 +1,15 @@
 function createPageLink(id, page, route, level, basePath) {
     const link = document.createElement("a");
     link.href = page.deriveURL(basePath, id);
-    link.text = page.title;
 
-    if(route.hasVisitedPageOnLevel(id, level)) {
+    if(page.checkActive(route, id, level)) {
+        const strongElement = document.createElement("strong");
+        const text = document.createTextNode(page.title);
+        strongElement.appendChild(text);
         link.className = "active";
+        link.appendChild(strongElement);
+    } else {
+        link.text = page.title;
     }
 
     return link;

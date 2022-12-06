@@ -18,6 +18,13 @@ class ContentPage extends Page {
     }
 
     /**
+     * @see Page#checkActive
+     */
+    checkActive(route, id, level) {
+        return route.hasVisitedPageOnLevel(id, level);
+    }
+
+    /**
      * @see Page#examineRoute
      */
     examineRoute(application, route, params, index = 0) {

@@ -39,6 +39,23 @@ class PageAlias extends Page {
     }
 
     /**
+     * @see Page#checkActive
+     */
+    checkActive(route, id, level) {
+        if(route.ids.length === this.ids.length) {
+            for(let i = 0; i < this.ids.length; i++) {
+                if(this.ids[i] != route.ids[i]) {
+                    return false;
+                }
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * @see Page#examineRoute
      */
     examineRoute(application, route, params, index = 0) {

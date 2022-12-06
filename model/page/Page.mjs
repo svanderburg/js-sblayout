@@ -62,6 +62,19 @@ class Page {
     }
 
     /**
+     * Checks whether the page is currently active
+     *
+     * @param route The route from the entry page to the current page
+     * @param id Identifier of the page
+     * @param level Level in the navigation structure
+     * @return true if the page is active, else false
+     */
+    checkActive(route, id, level)
+    {
+        throw new Error("Page::checkActive is abstract")
+    }
+
+    /**
      * Examines a route derived from the path components of the requested URL and records all pages visited.
      *
      * @param {Application} application Application layout where the page belongs to

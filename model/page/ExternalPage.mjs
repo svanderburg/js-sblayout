@@ -25,6 +25,13 @@ class ExternalPage extends Page {
     }
 
     /**
+     * @see Page#checkActive
+     */
+    checkActive(route, id, level) {
+        return false; // An external page can never be active since it always redirects the user to an external site
+    }
+
+    /**
      * @see Page#examineRoute
      */
     examineRoute(application, route, params, index = 0) {

@@ -16,12 +16,11 @@ export async function displayInlineMenuSection(res, route, level, baseURL) {
             if(subPage.checkVisibleInMenu()) {
                 const url = subPage.deriveURL(basePath, id);
 
-                res.write("<a");
-                    if(route.hasVisitedPageOnLevel(id, level)) {
-                    res.write(' class="active"');
+                if(subPage.checkActive(route, id, level)) {
+                    res.write('<a class="active" href="' + url + '"><strong>' + subPage.title + '</strong></a>\n');
+                } else {
+                    res.write('<a href="' + url + '">' + subPage.title + '</a>\n');
                 }
-
-                res.write(' href="' + url + '">' + subPage.title + '</a>\n');
             }
         }
     }
