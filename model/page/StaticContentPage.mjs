@@ -13,9 +13,10 @@ class StaticContentPage extends ContentPage {
      * @param {String} title Title of the page that is used as a label in a menu section
      * @param {Contents} contents A content object storing properties of the content sections of a page
      * @param {Object} subPages An object/dictionary or iterable object mapping ids to sub pages
+     * @param {String|Function} menuItem File or function that renders the menu item. Leaving it null just renders a hyperlink
      */
-    constructor(title, contents, subPages = {}) {
-        super(title, contents);
+    constructor(title, contents, subPages = {}, menuItem = null) {
+        super(title, contents, menuItem);
 
         if(isIterable(subPages)) {
             this.subPages = new Map(subPages);

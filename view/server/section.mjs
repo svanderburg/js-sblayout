@@ -58,7 +58,7 @@ export async function displaySection(req, res, application, id, section, route, 
     if(section instanceof StaticSection) {
         await displayStaticSection(req, res, section, templateHandlers);
     } else if(section instanceof MenuSection) {
-        await displayMenuSection(res, application, section, route, baseURL);
+        await displayMenuSection(req, res, application, section, route, baseURL, templateHandlers);
     } else if(section instanceof ContentsSection) {
         await displayContentsSection(req, res, id, currentPage, section, templateHandlers);
     } else if(section instanceof CompoundSection) {

@@ -10,9 +10,10 @@ class ExternalPage extends Page {
      *
      * @param {String} title Title of the page that is used as a label in a menu section
      * @param {String} url External URL to which the page redirects
+     * @param {String|Function} menuItem File or function that renders the menu item. Leaving it null just renders a hyperlink
      */
-    constructor(title, url) {
-        super(title);
+    constructor(title, url, menuItem = null) {
+        super(title, menuItem);
         this.url = url;
     }
 

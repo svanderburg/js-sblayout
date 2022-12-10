@@ -508,6 +508,80 @@ The framework propagates the following parameters (through `req.sbLayout` or
 * `currentPage` refers to the currently opened page
 * `error` refers to an error message in case something went wrong
   (e.g. a `BadRequestException`)
+* `templateHandlers` refers to functions that know how to expand templates for
+  a certain file format
+
+Rendering custom menu links
+---------------------------
+By default, `MenuSection`s are automatically populated with hyperlinks only
+containing page titles. This kind of presentation is often flexible enough,
+because hyperlinks can be styled in all kinds of interesting ways with CSS.
+
+In some occasions, it may also be desirable to present a link to a page in a
+completely different way. A custom renderer can be specified with an additional
+parameter to the constructor of a `Page` object:
+
+```javascript
+new StaticContentPage("Apple", new Contents("apple.html"), displayIconMenuItem)
+```
+
+In the above code fragement, the last parameter (the `menuItem` parameter)
+specifies a function that decides how it should be rendered in a `MenuSection`.
+
+We can use the custom renderer function (`displayIconMenuItem`) to present the
+menu link in a different way, such as an item that includes an icon.
+
+When developing a server-side application, it can be implemented as follows:
+
+```javascript
+export function displayIconMenuItem(req, res) {
+    res.write("<span>\n");
+    if(req.sbLayout.active) {
+        res.write('<a class="active" href="' + req.sbLayout.url + '">\n');
+        res.write('<img src="' + req.sbLayout.baseURL + '/image/menu/apple.png" alt="Apple">\n');
+        res.write('<strong>' + req.sbLayout.subPage.title + '</strong>\n');
+        res.write('</a>\n');
+    } else {
+        res.write('<a href="' + req.sbLayout.url + '">\n');
+        res.write('<img src="' + req.sbLayout.baseURL + '/image/menu/apple.png" alt="Apple">\n');
+        res.write(req.sbLayout.subPage.title + '\n');
+        res.write('</a>\n');
+    }
+    res.write("</span>\n");
+}
+```
+
+In a client-side application we can accomplish the same with the following
+function:
+
+```javascript
+export function displayIconMenuItem(div, params) {
+    let innerHTML = "<span>\n";
+
+    if(params.active) {
+        innerHTML += '<a class="active" href="' + params.url + '">\n';
+        innerHTML += '<img src="' + params.baseURL + "/image/menu/apple.png" + '" alt="Home icon">\n';
+        innerHTML += '<strong>' + params.subPage.title + '</strong>\n';
+        innerHTML += '</a>\n';
+    } else {
+        innerHTML += '<a href="' + params.url + '">\n';
+        innerHTML += '<img src="' + params.baseURL + "/image/menu/apple.png" + '" alt="Home icon">\n';
+        innerHTML += params.subPage.title + '\n';
+        innerHTML += '</a>\n';
+    }
+
+    innerHTML += "</span>\n";
+
+    div.innerHTML += innerHTML;
+}
+```
+
+Every included page that renders a menu item accepts three parameters: `active`
+indicates whether the link is active, `url` contains the URL of the link and
+`subPage` is the sub page that the link refers to.
+
+In the above code fragments, each hyperlink embeds an apple icon. When the menu
+item link is active, the text is also emphasized.
 
 Handling GET or POST parameters
 -------------------------------

@@ -12,12 +12,13 @@ function determinePath() {
     }
 }
 
-function createParams(application) {
+function createParams(application, templateHandlers) {
     return {
         application: application,
         baseURL: window.location.pathname,
         query: {},
-        "accept-language": window.navigator.languages
+        "accept-language": window.navigator.languages,
+        templateHandlers: templateHandlers
     };
 }
 
@@ -53,7 +54,7 @@ function updateDynamicParts(application, route, currentPage, params, templateHan
  * @param {Object} templateHandlers An object mapping file extensions to functions that renders the file
  */
 export function initRequestedPage(application, templateHandlers = {}) {
-    const params = createParams(application);
+    const params = createParams(application, templateHandlers);
     const path = determinePath();
 
     /* Determine page route */
@@ -104,7 +105,7 @@ export function initRequestedPage(application, templateHandlers = {}) {
  * @param {Object} templateHandlers An object mapping file extensions to functions that renders the file
  */
 export function updateRequestedPage(application, templateHandlers = {}) {
-    const params = createParams(application);
+    const params = createParams(application, templateHandlers);
     const path = determinePath();
 
     /* Determine page route */

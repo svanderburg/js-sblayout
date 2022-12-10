@@ -13,9 +13,10 @@ class PageAlias extends Page {
      * @param {String} title Title of the page that is used as a label in a menu section
      * @param {String} path Path to the actual page relative from the entry page
      * @param {Object} subPages An object/dictionary or iterable object mapping ids to sub pages
+     * @param {String|Function} menuItem File or function that renders the menu item. Leaving it null just renders a hyperlink
      */
-    constructor(title, path, subPages = {}) {
-        super(title);
+    constructor(title, path, subPages = {}, menuItem = null) {
+        super(title, menuItem);
 
         if(path == "") {
             this.ids = [];

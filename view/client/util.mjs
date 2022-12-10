@@ -20,7 +20,7 @@ function processTemplate(element, section, response, templateHandlers) {
  * contents or a function that renders the file by using a custom method, such
  * as a templating engine.
  *
- * @param {String} section File to be displayed
+ * @param {String|Function} section File to be displayed (String) or function that renders a portion of a page
  * @param {String} basePath Base directory where the section file is stored
  * @param {HTMLElement} element HTML element in which the content needs to be updated
  * @param {Object} params An object with arbitrary parameters

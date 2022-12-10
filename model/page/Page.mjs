@@ -7,9 +7,11 @@ class Page {
      * Creates a new Page instance.
      *
      * @param {String} title Title of the page that is used as a label in a menu section
+     * @param {String|Function} menuItem File or function that renders the menu item. Leaving it null just renders a hyperlink
      */
-    constructor(title) {
+    constructor(title, menuItem = null) {
         this.title = title;
+        this.menuItem = menuItem;
     }
 
     /**

@@ -83,10 +83,11 @@ class LocalizedContentPage extends StaticContentPage {
      * Creates a new LocalizedContentPage instance.
      *
      * @param {Object} subPages An object/dictionary or iterable object mapping language identifiers (i.e. language-country) to sub pages
+     * @param {String|Function} menuItem File or function that renders the menu item. Leaving it null just renders a hyperlink
      */
-    constructor(subPages = {}) {
+    constructor(subPages = {}, menuItem = null) {
         const firstEntry = determineFirstEntry(subPages);
-        super(firstEntry.firstPage.title, firstEntry.firstPage.contents, subPages);
+        super(firstEntry.firstPage.title, firstEntry.firstPage.contents, subPages, menuItem);
         this.firstKey = firstEntry.firstKey;
     }
 

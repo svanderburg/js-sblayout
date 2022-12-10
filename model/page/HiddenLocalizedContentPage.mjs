@@ -7,8 +7,8 @@ class HiddenLocalizedContentPage extends LocalizedContentPage {
     /**
      * @see LocalizedContentPage#constructor
      */
-    constructor(subPages = {}) {
-        super(subPages);
+    constructor(subPages = {}, menuItem = null) {
+        super(subPages, menuItem);
     }
 
     /**

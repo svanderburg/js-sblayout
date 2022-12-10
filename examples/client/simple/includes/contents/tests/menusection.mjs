@@ -1,7 +1,7 @@
 import { displayEmbeddedMenuSection } from "../../../../../../view/client/embeddedmenusection.mjs";
 
 function displayCommonMenuSection(div, params) {
-    displayEmbeddedMenuSection(div, params.route, 2, params.baseURL);
+    displayEmbeddedMenuSection(div, params.route, 2, params.baseURL, params, params.templateHandlers);
 }
 
 function createParagraphWithText(text) {

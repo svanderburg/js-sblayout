@@ -7,8 +7,8 @@ class HiddenStaticContentPage extends StaticContentPage {
     /**
      * @see StaticContentPage#constructor
      */
-    constructor(title, contents, subPages = {}) {
-        super(title, contents, subPages);
+    constructor(title, contents, subPages = {}, menuItem = null) {
+        super(title, contents, subPages, menuItem);
     }
 
     /**

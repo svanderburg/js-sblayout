@@ -11,6 +11,9 @@ import { PageAlias } from "../../../model/page/PageAlias.mjs";
 
 import { Contents } from "../../../model/page/content/Contents.mjs";
 
+import { displayIconMenuItem } from "./includes/menuitems/icon.mjs";
+import { displayStyleMenuItem } from "./includes/menuitems/style.mjs";
+
 export const application = new Application(
     /* Title */
     "Advanced test website",
@@ -89,6 +92,20 @@ export const application = new Application(
                 contents: "header/second.html",
                 header: "header/second.html"
             }))
+        }),
+
+        menu: new StaticContentPage("Menu", new Contents({
+            contents: "menu.html",
+            header: "home.html",
+        }), {
+            icon: new StaticContentPage("Icon", new Contents({
+                contents: "menu/icon.html",
+                header: "home.html"
+            }), {}, displayIconMenuItem),
+            style: new StaticContentPage("Style", new Contents({
+                contents: "menu/style.html",
+                header: "home.html"
+            }), {}, displayStyleMenuItem)
         })
     }),
 

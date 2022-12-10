@@ -1,7 +1,7 @@
 import { displayEmbeddedMenuSection } from "../../../../../../view/server/embeddedmenusection.mjs";
 
 function displayCommonMenuSection(req, res) {
-    displayEmbeddedMenuSection(res, req.sbLayout.route, 2, req.sbLayout.baseURL);
+    displayEmbeddedMenuSection(req, res, req.sbLayout.route, 2, req.sbLayout.baseURL, req.sbLayout.templateHandlers);
 }
 
 export function displayMenuSectionContents(req, res) {

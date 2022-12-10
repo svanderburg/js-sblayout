@@ -23,7 +23,7 @@ function streamFile(res, filePath) {
  *
  * @param {Object} req An object that contains the HTTP request parameters
  * @param {Object} res An object that allows you to write an HTTP response
- * @param {String} section File to be displayed
+ * @param {String|Function} section File to be displayed (String) or a function that renders a portion of a page
  * @param {String} basePath Base directory where the section file is stored
  * @param {Object} templateHandlers An object mapping file extensions to functions that renders the file
  * @return {String} String representation of the content to be displayed

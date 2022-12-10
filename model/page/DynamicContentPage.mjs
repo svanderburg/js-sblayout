@@ -12,9 +12,10 @@ class DynamicContentPage extends ContentPage {
      * @param {String} param The name of the query parameter that must be set when retrieving the sub page
      * @param {Contents} contents A content object storing properties of the content sections of a page
      * @param {Page} dynamicSubPage The dynamic sub page that interprets the URL parameter component
+     * @param {String|Function} menuItem File or function that renders the menu item. Leaving it null just renders a hyperlink
      */
-    constructor(title, param, contents, dynamicSubPage) {
-        super(title, contents);
+    constructor(title, param, contents, dynamicSubPage, menuItem = null) {
+        super(title, contents, menuItem);
         this.param = param;
         this.dynamicSubPage = dynamicSubPage;
     }

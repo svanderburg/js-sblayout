@@ -51,7 +51,7 @@ export function updateSection(div, application, section, id, route, currentPage,
     if(section instanceof StaticSection) {
         loadStaticSectionIntoDiv(section, div, params, templateHandlers);
     } else if(section instanceof MenuSection) {
-        displayMenuSection(div, application, section, route, params.baseURL);
+        displayMenuSection(div, application, section, route, params.baseURL, params, templateHandlers);
     } else if(section instanceof ContentsSection) {
         loadContentsSectionIntoDiv(section, id, currentPage, div, params, templateHandlers);
     } else if(section instanceof CompoundSection) {

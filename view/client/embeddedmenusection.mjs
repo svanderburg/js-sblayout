@@ -7,11 +7,13 @@ import { displayInlineMenuSection } from "./inlinemenusection.mjs";
  * @param {Route} route Route from the entry page to current page to be displayed
  * @param {number} level The level in the navigation structure where to display sub page links from
  * @param {String} baseURL Base URL of the web application
+ * @param {Object} params An object with arbitrary parameters
+ * @param {Object} templateHandlers An object mapping file extensions to functions that renders the file
  */
-export function displayEmbeddedMenuSection(div, route, level, baseURL) {
+export function displayEmbeddedMenuSection(div, route, level, baseURL, params, templateHandlers) {
     const paragraph = document.createElement("p");
     paragraph.className = "menusection";
 
-    displayInlineMenuSection(paragraph, route, level, baseURL);
+    displayInlineMenuSection(paragraph, route, level, baseURL, params, templateHandlers);
     div.appendChild(paragraph);
 }

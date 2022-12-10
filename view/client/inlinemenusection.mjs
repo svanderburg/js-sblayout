@@ -1,19 +1,5 @@
-function createPageLink(id, page, route, level, basePath) {
-    const link = document.createElement("a");
-    link.href = page.deriveURL(basePath, id);
-
-    if(page.checkActive(route, id, level)) {
-        const strongElement = document.createElement("strong");
-        const text = document.createTextNode(page.title);
-        strongElement.appendChild(text);
-        link.className = "active";
-        link.appendChild(strongElement);
-    } else {
-        link.text = page.title;
-    }
-
-    return link;
-}
+import { createMenuItem } from "./menuitem.mjs";
+import { includeSection } from "./util.mjs";
 
 /**
  * Displays an inline representation of a menu section.
@@ -22,8 +8,10 @@ function createPageLink(id, page, route, level, basePath) {
  * @param {Route} route Route from the entry page to current page to be displayed
  * @param {number} level The level in the navigation structure where to display sub page links from
  * @param {String} baseURL Base URL of the web application
+ * @param {Object} params An object with arbitrary parameters
+ * @param {Object} templateHandlers An object mapping file extensions to functions that renders the file
  */
-export function displayInlineMenuSection(div, route, level, baseURL) {
+export function displayInlineMenuSection(div, route, level, baseURL, params, templateHandlers) {
     if(level <= route.ids.length) {
         const basePath = route.composeURLAtLevel(baseURL + "#", level);
         const rootPage = route.pages[level];
@@ -31,8 +19,18 @@ export function displayInlineMenuSection(div, route, level, baseURL) {
         // Display links to the sub pages
         for(const [id, subPage] of rootPage.subPageIterable()) {
             if(subPage.checkVisibleInMenu()) {
-                const link = createPageLink(id, subPage, route, level, basePath);
-                div.appendChild(link);
+                const url = subPage.deriveURL(basePath, id);
+                const active = subPage.checkActive(route, id, level);
+
+                if(subPage.menuItem === null) {
+                    const link = createMenuItem(active, url, subPage, basePath);
+                    div.appendChild(link);
+                } else {
+                    params.active = active;
+                    params.url = url;
+                    params.subPage = subPage;
+                    includeSection(subPage.menuItem, basePath, div, params, div.innerHTML, templateHandlers);
+                }
 
                 const textNode = document.createTextNode(" ");
                 div.appendChild(textNode);
