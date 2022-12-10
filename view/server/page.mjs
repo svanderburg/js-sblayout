@@ -1,6 +1,6 @@
 import { PageException } from "../../model/PageException.mjs";
 
-function emitHeader(res, ex) {
+function emitHeader(res, charset, ex) {
     let status;
 
     if(ex === undefined) {
@@ -12,7 +12,7 @@ function emitHeader(res, ex) {
     }
 
     res.writeHead(status, {
-        "Content-Type": "text/html"
+        "Content-Type": "text/html; charset=" + charset
     });
 }
 
@@ -29,7 +29,7 @@ function emitHeader(res, ex) {
 export function determineRoute(res, application, path, params) {
     const appPath = path.substring(params.baseURL.length); // Subtract the baseURL from the path to look up
     const route = application.determineRoute(appPath, params);
-    emitHeader(res);
+    emitHeader(res, application.charset);
     return route;
 }
 
@@ -49,6 +49,6 @@ export function redirectToErrorPage(req, res, application, ex, params) {
         req.sbLayout.error = ex.displayMessage;
     }
     const route = application.determineErrorRoute(ex, params);
-    emitHeader(res, ex);
+    emitHeader(res, application.charset, ex);
     return route;
 }
