@@ -1,5 +1,5 @@
 import { displayMenuItem } from "./menuitem.mjs";
-import { includeSection } from "./util.mjs";
+import { displayCustomMenuItem } from "./custommenuitem.mjs";
 
 /**
  * Displays an inline representation of a menu section.
@@ -25,11 +25,7 @@ export async function displayInlineMenuSection(req, res, route, level, baseURL, 
                 if(subPage.menuItem === null) {
                     displayMenuItem(res, active, url, subPage);
                 } else {
-                    req.sbLayout.active = active;
-                    req.sbLayout.url = url;
-                    req.sbLayout.subPage = subPage;
-
-                    includeSection(req, res, subPage.menuItem, "menuitems", templateHandlers);
+                    displayCustomMenuItem(req, res, active, url, subPage, templateHandlers);
                 }
             }
         }
