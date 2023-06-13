@@ -56,9 +56,10 @@ class Page {
      *
      * @param {String} baseURL Base URL of the page
      * @param {String} id Identifier of the page
+     * @param {String} The symbol that separates arguments
      * @return {String} The URL to this page
      */
-    deriveURL(baseURL, id)
+    deriveURL(baseURL, id, argSeparator = "&amp;")
     {
         return baseURL + "/" + encodeURIComponent(id);
     }
@@ -66,9 +67,9 @@ class Page {
     /**
      * Checks whether the page is currently active
      *
-     * @param route The route from the entry page to the current page
-     * @param id Identifier of the page
-     * @param level Level in the navigation structure
+     * @param {Route} route The route from the entry page to the current page
+     * @param {String} id Identifier of the page
+     * @param {numeric} level Level in the navigation structure
      * @return true if the page is active, else false
      */
     checkActive(route, id, level)

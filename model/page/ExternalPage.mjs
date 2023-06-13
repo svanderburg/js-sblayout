@@ -20,7 +20,7 @@ class ExternalPage extends Page {
     /**
      * @see Page#deriveURL
      */
-    deriveURL(baseURL, id)
+    deriveURL(baseURL, id, argSeparator = "&amp;")
     {
         return this.url;
     }

@@ -25,7 +25,7 @@ export function displayBreadcrumbs(req, res, route, startIndex = 0, displayRoot 
         const currentId = route.ids[i];
         const currentPage = route.pages[i + 1];
 
-        url = currentPage.deriveURL(url, currentId);
+        url = currentPage.deriveURL(url, currentId, "&amp;");
 
         if(i >= startIndex) {
             if(first)

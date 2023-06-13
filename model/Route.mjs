@@ -77,14 +77,14 @@ class Route {
      * @param {numeric} level Page level
      * @return {String} The URL of the current page or any of its parent pages
      */
-    composeURLAtLevel(baseURL, level) {
+    composeURLAtLevel(baseURL, level, argSeparator = "&amp;") {
         let url = baseURL;
 
         for(let i = 0; i < level; i++) {
             const currentId = this.ids[i];
             const currentPage = this.pages[i + 1];
 
-            url = currentPage.deriveURL(url, currentId);
+            url = currentPage.deriveURL(url, currentId, argSeparator);
         }
 
         return url;
@@ -96,8 +96,8 @@ class Route {
      * @param {String} baseURL Base URL to prepend to the resulting URL
      * @return {String} The URL to the parent page
      */
-    composeParentPageURL(baseURL) {
-        return this.composeURLAtLevel(baseURL, this.ids.length - 1);
+    composeParentPageURL(baseURL, argSeparator = "&amp;") {
+        return this.composeURLAtLevel(baseURL, this.ids.length - 1, argSeparator);
     }
 }
 

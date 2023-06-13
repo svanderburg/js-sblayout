@@ -16,7 +16,7 @@ export function displaySubSiteMap(res, page, baseURL) {
         }
 
         if(subPage.checkVisibleInMenu()) {
-            const url = subPage.deriveURL(baseURL, id);
+            const url = subPage.deriveURL(baseURL, id, "&amp;");
             res.write("<li>\n");
             res.write('<a href="' + url + '">' + subPage.title + '</a>\n');
             displaySubSiteMap(res, subPage, url);

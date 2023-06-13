@@ -19,7 +19,7 @@ export function displayInlineMenuSection(div, route, level, baseURL, params, tem
         // Display links to the sub pages
         for(const [id, subPage] of rootPage.subPageIterable()) {
             if(subPage.checkVisibleInMenu()) {
-                const url = subPage.deriveURL(basePath, id);
+                const url = subPage.deriveURL(basePath, id, "&amp;");
                 const active = subPage.checkActive(route, id, level);
 
                 if(subPage.menuItem === null) {
