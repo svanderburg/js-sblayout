@@ -14,6 +14,8 @@ import { Contents } from "../../../model/page/content/Contents.mjs";
 import { displayIconMenuItem } from "./includes/menuitems/icon.mjs";
 import { displayStyleMenuItem } from "./includes/menuitems/style.mjs";
 
+import { displaySiteMapMenuContents } from "./includes/contents/menu/sitemapmenu.mjs";
+
 export const application = new Application(
     /* Title */
     "Advanced test website",
@@ -105,7 +107,11 @@ export const application = new Application(
             style: new StaticContentPage("Style", new Contents({
                 contents: "menu/style.html",
                 header: "home.html"
-            }), {}, displayStyleMenuItem)
+            }), {}, displayStyleMenuItem),
+            sitemapmenu: new StaticContentPage("Site map menu", new Contents({
+                contents: displaySiteMapMenuContents,
+                header: "home.html"
+            }))
         })
     }),
 

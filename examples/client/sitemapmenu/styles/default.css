@@ -1,0 +1,189 @@
+body
+{
+	font-family: arial, lucida, helvetica, sans-serif;
+	background-color: #000000;
+	color: #ffffff;
+
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 5px;
+}
+
+img
+{
+	border-style: none;
+	max-width: 100%;
+	width: auto;
+	height: auto;
+}
+
+#header
+{
+	background-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+	border-top-color: #ffffff;
+	border-left-color: #ffffff;
+	border-bottom-color: #222222;
+	border-right-color: #222222;
+}
+
+#menu
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+
+	background-color: #3355ff;
+	border-style: solid;
+	border-width: 1px;
+	border-top-color: #ffffff;
+	border-left-color: #ffffff;
+	border-bottom-color: #555555;
+	border-right-color: #555555;
+	text-align: center;
+}
+
+/* Hide root link of the sitemap */
+#menu > a
+{
+	display: none;
+}
+
+#menu ul
+{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 5px;
+}
+
+#menu ul li
+{
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+#menu ul li a
+{
+	border-style: solid;
+	border-width: 1px;
+	border-top-color: #ffffff;
+	border-left-color: #ffffff;
+	border-bottom-color: #555555;
+	border-right-color: #555555;
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	text-decoration: none;
+	background-color: #2233bb;
+	color: #ffffff;
+}
+
+#menu ul li a:hover
+{
+	background-color: #3344ee;
+}
+
+#menu ul li a.active
+{
+	border-top-color: #555555;
+	border-left-color: #555555;
+	border-bottom-color: #ffffff;
+	border-right-color: #ffffff;
+}
+
+#menu ul li ul
+{
+	position: absolute; /* Enables the panel to overlap the rest of the screen */
+	top: 25px;
+	left: 20%;
+	right: 20%;
+	padding: 5px;
+	z-index: 1;
+
+	display: none; /* Make the sub menu unorder lists invisible by default */
+
+	background-color: #ff3311;
+	border-style: solid;
+	border-width: 1px;
+	border-top-color: #ffffff;
+	border-left-color: #ffffff;
+	border-bottom-color: #555555;
+	border-right-color: #555555;
+}
+
+#menu ul li:hover ul
+{
+	display: block; /* Make the panel visible when somebody hovers over the unordered list */
+}
+
+#menu ul li ul li
+{
+	margin-top: 2px; /* Increase margins to prevent buttons from overlapping */
+	margin-bottom: 2px;
+}
+
+#menu ul li ul li a
+{
+	border-style: solid;
+	border-width: 1px;
+	border-top-color: #ffffff;
+	border-left-color: #ffffff;
+	border-bottom-color: #555555;
+	border-right-color: #555555;
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	text-decoration: none;
+	background-color: #bb3322;
+	color: #ffffff;
+}
+
+#menu ul li ul li a:hover
+{
+	background-color: #ee4433;
+}
+
+#menu ul li ul li a.active
+{
+	border-top-color: #555555;
+	border-left-color: #555555;
+	border-bottom-color: #ffffff;
+	border-right-color: #ffffff;
+}
+
+@media only screen and (min-width: 1024px)
+{
+	#menu
+	{
+		position: static;
+	}
+
+	/* Level 0 */
+
+	#menu ul
+	{
+		flex-direction: row;
+	}
+
+	/* Level 1 */
+
+	#menu ul li ul
+	{
+		left: auto;
+		right: auto;
+	}
+
+	#menu ul li ul li a
+	{
+		width: 6em;
+	}
+}

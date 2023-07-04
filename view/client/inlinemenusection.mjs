@@ -1,5 +1,4 @@
 import { createMenuItem } from "./menuitem.mjs";
-import { createCustomMenuItem } from "./custommenuitem.mjs";
 
 /**
  * Displays an inline representation of a menu section.
@@ -22,12 +21,7 @@ export function displayInlineMenuSection(div, route, level, baseURL, params, tem
                 const url = subPage.deriveURL(basePath, id, "&amp;");
                 const active = subPage.checkActive(route, id, level);
 
-                if(subPage.menuItem === null) {
-                    const link = createMenuItem(active, url, subPage);
-                    div.appendChild(link);
-                } else {
-                    createCustomMenuItem(div, active, url, subPage, basePath, params, templateHandlers);
-                }
+                createMenuItem(div, active, url, subPage, basePath, params, templateHandlers);
 
                 const textNode = document.createTextNode(" ");
                 div.appendChild(textNode);

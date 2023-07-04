@@ -1,33 +1,44 @@
+import { createMenuItem } from "./menuitem.mjs";
+import { createStandardMenuItem } from "./standardmenuitem.mjs";
+
 /**
- * Displays a site map of all sub pages and transitive sub pages reachable from a given page.
+ * Displays a site map consisting of all sub pages and transitive sub pages of a given page.
  *
+ * @param {HTMLDivElement} div HTML Div element to update
+ * @param {Route} route Route from the entry page to current page to be displayed
  * @param {Page} page Page to display the sub pages from
+ * @param {boolean} displayMenuItems Indicates whether to display each page link as a menu item or an ordinary link
  * @param {String} baseURL URL of the given page
- * @return {String} HTML representation of the sub site map
+ * @param {number} level The level in the navigation structure where to display sub page links from
+ * @param {Object} params An object with arbitrary parameters
+ * @param {Object} templateHandlers An object mapping file extensions to functions that renders the file
  */
-export function displaySubSiteMap(page, baseURL) {
-    let innerHTML = "";
+export function displaySubSiteMap(div, route, page, displayMenuItems, baseURL, level, params, templateHandlers) {
     const iterator = page.subPageIterable();
     let hasSubPages = false;
+    let unorderedList;
 
     for(const [id, subPage] of iterator) {
         if(!hasSubPages) {
             hasSubPages = true;
-            innerHTML += "<ul>\n";
+            unorderedList = document.createElement("ul");
+            div.appendChild(unorderedList);
         }
 
         if(subPage.checkVisibleInMenu()) {
             const url = subPage.deriveURL(baseURL, id, "&amp;");
-            innerHTML += "<li>\n";
-            innerHTML += '<a href="' + url + '">' + subPage.title + '</a>\n';
-            innerHTML += displaySubSiteMap(subPage, url);
-            innerHTML += "</li>\n";
+            const listItem = document.createElement("li");
+
+            if(displayMenuItems) {
+                const active = subPage.checkActive(route, id, level);
+                createMenuItem(listItem, active, url, subPage, baseURL, params, templateHandlers);
+            } else {
+                const link = createStandardMenuItem(false, url, subPage);
+                listItem.appendChild(link);
+            }
+
+            displaySubSiteMap(listItem, route, subPage, displayMenuItems, url, level + 1, params, templateHandlers)
+            unorderedList.appendChild(listItem);
         }
     }
-
-    if(hasSubPages) {
-        innerHTML += "</ul>\n";
-    }
-
-    return innerHTML;
 }

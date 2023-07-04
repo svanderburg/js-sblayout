@@ -1,9 +1,11 @@
 import { StaticSection } from "../../model/section/StaticSection.mjs";
+import { SiteMapSection } from "../../model/section/SiteMapSection.mjs";
 import { MenuSection } from "../../model/section/MenuSection.mjs";
 import { ContentsSection } from "../../model/section/ContentsSection.mjs";
 import { CompoundSection } from "../../model/section/CompoundSection.mjs";
 
 import { displayMenuSection } from "./menusection.mjs";
+import { displaySiteMapSection } from "./sitemapsection.mjs";
 import { displaySections } from "./sections.mjs";
 import { includeSection } from "./util.mjs";
 
@@ -57,6 +59,8 @@ export async function displaySection(req, res, application, id, section, route, 
 
     if(section instanceof StaticSection) {
         await displayStaticSection(req, res, section, templateHandlers);
+    } else if(section instanceof SiteMapSection) {
+        await displaySiteMapSection(req, res, section, route, baseURL, templateHandlers);
     } else if(section instanceof MenuSection) {
         await displayMenuSection(req, res, application, section, route, baseURL, templateHandlers);
     } else if(section instanceof ContentsSection) {

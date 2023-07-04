@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>My page</title>
+        <script type="module">
+import { application } from "./appmodel.mjs";
+import { initRequestedPage, updateRequestedPage } from "../../../view/client/index.mjs";
+
+document.body.onload = function() {
+    initRequestedPage(application);
+};
+
+document.body.onpopstate = function() {
+    updateRequestedPage(application);
+};
+        </script>
+    </head>
+
+    <body>
+    </body>
+</html>

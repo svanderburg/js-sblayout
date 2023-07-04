@@ -1,8 +1,10 @@
 import { ContentsSection } from "../../model/section/ContentsSection.mjs";
+import { SiteMapSection } from "../../model/section/SiteMapSection.mjs";
 import { MenuSection } from "../../model/section/MenuSection.mjs";
 import { StaticSection } from "../../model/section/StaticSection.mjs";
 import { CompoundSection } from "../../model/section/CompoundSection.mjs";
 import { displayMenuSection } from "./menusection.mjs";
+import { displaySiteMapSection } from "./sitemapsection.mjs";
 import { includeSection } from "./util.mjs";
 import { updateSections } from "./sections.mjs";
 
@@ -50,6 +52,8 @@ function loadContentsSectionIntoDiv(section, id, currentPage, div, params, templ
 export function updateSection(div, application, section, id, route, currentPage, params, templateHandlers) {
     if(section instanceof StaticSection) {
         loadStaticSectionIntoDiv(section, div, params, templateHandlers);
+    } else if(section instanceof SiteMapSection) {
+        displaySiteMapSection(div, section, route, params.baseURL, params, templateHandlers);
     } else if(section instanceof MenuSection) {
         displayMenuSection(div, application, section, route, params.baseURL, params, templateHandlers);
     } else if(section instanceof ContentsSection) {

@@ -100,6 +100,8 @@ export function initRequestedPage(application, templateHandlers = {}) {
 
 /**
  * Updates all dynamic sections of the application layout in the DOM.
+ * If a window.dynamicUnload function is defined, then it gets invoked afer
+ * page was updated.
  *
  * @param {Application} application Encoding of the web application layout and pages
  * @param {Object} templateHandlers An object mapping file extensions to functions that renders the file
@@ -132,4 +134,9 @@ export function updateRequestedPage(application, templateHandlers = {}) {
 
     /* Update all dynamic parts */
     updateDynamicParts(application, route, currentPage, params, templateHandlers);
+
+    /* Call the dynamic onload handler if it exists */
+    if(typeof window.dynamicOnload === "function") {
+        window.dynamicOnload();
+    }
 }

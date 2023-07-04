@@ -19,6 +19,21 @@ img
 	height: auto;
 }
 
+a:link
+{
+	color: #0000ff;
+}
+
+a:visited
+{
+	color: #ff00ff;
+}
+
+a.active
+{
+	color: #ffff00;
+}
+
 button
 {
 	border-style: solid;

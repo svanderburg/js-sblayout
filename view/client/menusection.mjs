@@ -12,6 +12,6 @@ import { displayInlineMenuSection } from "./inlinemenusection.mjs";
  * @param {Object} templateHandlers An object mapping file extensions to functions that renders the file
  */
 export function displayMenuSection(div, application, section, route, baseURL, params, templateHandlers) {
-    div.innerHTML = "";
+    div.innerHTML = ""; // Clear the content before rendering it. Otherwise it appears multiple times
     displayInlineMenuSection(div, route, section.level, baseURL, params, templateHandlers);
 }

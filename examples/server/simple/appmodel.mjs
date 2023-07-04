@@ -26,7 +26,7 @@ import { displayMenuSectionContents, displayMenuSectionSubpage1, displayMenuSect
 
 export const application = new Application(
     /* Title */
-    "My application",
+    "Simple test website",
 
     /* Styles */
     [ "default.css" ],
