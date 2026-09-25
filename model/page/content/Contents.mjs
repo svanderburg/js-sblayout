@@ -9,7 +9,7 @@ class Contents {
      * Creates a new contents instance.
      *
      * @param {String|Object} An object mapping division ids onto files representing HTML content or a string, which represents the contents of the contents division.
-     * @param {String} controller A string containing the path to the controller page that handles GET or POST parameters
+     * @param {String} controller A string containing the path to the controller page that handles GET or POST parameters or null if there is none (pages that do not process parameters do not require one)
      * @param {Array.<String>} styles An array containing stylesheet files to include when requesting this page 
      * @param {Array.<String>} scripts An array containing script files to include when requesting this page
      */

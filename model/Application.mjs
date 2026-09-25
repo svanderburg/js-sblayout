@@ -13,7 +13,7 @@ class Application {
      * @param {Array.<String>} styles An array of CSS stylesheets used for all pages
      * @param {Object} sections An object/dictionary or iterable object of sections of which the page is composed
      * @param {Page} entryPage The entry page of the application
-     * @param {String} icon The favorite icon the page should use
+     * @param {String} icon The favorite icon the page should use or null if no favorite icon is used
      * @param {Array.<String>} scripts An array of JavaScript files included by all pages
      * @param {String} charset The character encoding standard that the page should use (defaults to UTF-8)
      */
